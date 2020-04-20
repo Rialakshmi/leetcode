@@ -1,0 +1,21 @@
+//1052. Grumpy Bookstore Owner
+public int maxSatisfied(int[] customers, int[] grumpy, int K) {
+        int max=0;
+        int startWindow=0;
+        int windowMax=0;
+        int satisfied=0;
+        for(int endWindow=0;endWindow<customers.length;endWindow++) {
+            if(grumpy[endWindow]==0)
+                satisfied+=customers[endWindow];
+            else
+                windowMax+=customers[endWindow];
+            if(endWindow-startWindow-K+1>0) {
+                    windowMax-=customers[startWindow]*grumpy[startWindow];
+                    startWindow++;
+            }
+            
+            max = Math.max(max,windowMax);
+        }
+        
+        return satisfied+max;
+    }
