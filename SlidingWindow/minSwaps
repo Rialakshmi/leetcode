@@ -1,0 +1,19 @@
+  //1151. Minimum Swaps to Group All 1's Together
+  public int minSwaps(int[] data) {
+        int numOnes=0;
+        for(int d:data) {
+            numOnes+=d;
+        }
+        int k=numOnes;
+        int maxOnes=0;
+        int windowOnes=0;
+        for(int startWindow=0,endWindow=0;endWindow<data.length;endWindow++) {
+            windowOnes+=data[endWindow];
+            if(endWindow+1-startWindow==k) {
+                maxOnes=Math.max(maxOnes,windowOnes);
+                windowOnes-=data[startWindow++];
+            }
+        }
+        
+        return numOnes-maxOnes;
+    }
