@@ -1,0 +1,22 @@
+//Diet Plan Performance
+class Solution {
+    public int dietPlanPerformance(int[] calories, int k, int lower, int upper) {
+        int startWindow=0;
+        int caloriees=0;
+        int points=0;
+        for(int endWindow=0;endWindow<calories.length;endWindow++) {
+            caloriees+=calories[endWindow];
+            if(endWindow-startWindow+1-k>0) {
+                caloriees -= calories[startWindow++];
+            }
+            if(endWindow-startWindow+1-k==0) {
+                if(caloriees<lower)
+                    points--;
+                if(caloriees>upper)
+                    points++;
+            } 
+        }
+        
+        return points;
+    }
+}
