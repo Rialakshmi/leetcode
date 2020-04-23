@@ -1,0 +1,25 @@
+//1021. Remove Outermost Parentheses
+class Solution {
+    public String removeOuterParentheses(String S) {
+    
+        StringBuffer sb=new StringBuffer(S);
+        Stack<Character> stack=new Stack<>();
+        int start=0;
+        for(int i=0;i<sb.length();i++) {
+            char curr=sb.charAt(i);
+           if(stack.isEmpty()&&curr=='(') {
+               stack.push(curr);
+               sb.setCharAt(i,'*');
+           }
+            else if(stack.size()==1&&stack.peek()=='('&&curr==')') {
+                stack.pop();
+                sb.setCharAt(i,'*');
+            }else if(curr=='(') {
+                stack.push(curr);
+            }else if(curr==')')
+                stack.pop();
+        }
+        
+        return sb.toString().replaceAll("\\*","");
+    }
+}
